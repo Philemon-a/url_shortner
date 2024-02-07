@@ -6,5 +6,7 @@ const router = express.Router();
 router.post('/shorten', generateShortUrl);
 router.get('/:urlId', redirectUrl);
 
+module.exports = router;
+
 
 

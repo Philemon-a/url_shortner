@@ -1,15 +1,15 @@
-const nanoid = require('nanoid');
-const validUrl = require('valid-url');
+const numeral = require('numeral');
 const Url = require('../models/url.models');
+const isUrl = require('is-url');
 const dotenv = require('dotenv');
 dotenv.config({path:'../config/.env'});
 
 module.exports.generateShortUrl = async (req, res) => {
     const {origUrl} = req.body;
-    const baseUrl = process.env.BASE_URL;
+    const baseUrl = process.env.BASE;
 
-    const urlId = nanoid(7);
-    if (validUrl.isUri(origUrl)) {
+    const urlId = numeral(Math.floor(Math.random() * 1000000)).format('000000');
+    if (isUrl(origUrl)) {
         try{
             let url= await Url.findOne({origUrl});
             if (url){
